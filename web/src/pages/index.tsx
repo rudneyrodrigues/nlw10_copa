@@ -19,10 +19,12 @@ const Home: NextPage = ({ pools }: HomeProps): JSX.Element => {
         <meta name="description" content="Crie seu próprio bolão da copa e compartilhe com os amigos! Dê seu palpite a cada jogo e veja quantos pontos você consegue no final." />
       </Head>
 
-      <div className="flex flex-col min-h-screen bg-bg-effects">
-        <h1 className="text-2xl font-bold">
-          Bolões criados: {pools.count}
-        </h1>
+      <div className="flex flex-col min-h-screen bg-bg-effects bg-no-repeat bg-cover">
+        <div className="flex flex-1 items-center justify-center px-4">
+          <h1 className="text-2xl font-bold">
+            Bolões criados: {pools.count}
+          </h1>
+        </div>
       </div>
     </>
   )
