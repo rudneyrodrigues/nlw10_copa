@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import { FormEvent } from "react";
+import { toast } from 'react-hot-toast';
+import { FormEvent, useState } from "react";
 import { GetStaticProps, type NextPage } from "next";
 
 import { api } from "../services/api";
@@ -18,8 +19,37 @@ interface HomeProps {
 }
 
 const Home: NextPage = ({ pools, guesses, users }: HomeProps): JSX.Element => {
-  const handleCreateNewPool = (e: FormEvent) => {
+  const [inputPool, setInputPool] = useState('');
+
+  const createNewPool = async (e: FormEvent) => {
     e.preventDefault();
+    if (inputPool.trim() === '') {
+      return (
+        toast.error("Preencha o campo com o nome do bolão a ser criado!")
+      )
+    }
+
+    try {
+      const response = await api.post('/pools', {
+        title: inputPool.trim(),
+      })
+
+      const { code } = response.data;
+      await navigator.clipboard.writeText(code);
+
+      toast.success(`Bolão criado com sucesso.\n\nO código ${code} foi copiado para a área de transferência!`, {
+        duration: 10000,
+        style: {
+          background: "#121214",
+          color: "#ffffff",
+        }
+      })
+
+      setInputPool('');
+    } catch (error) {
+      console.log(error);
+      toast.error('Falha ao criar bolão')
+    }
   }
 
   return (
@@ -60,11 +90,13 @@ const Home: NextPage = ({ pools, guesses, users }: HomeProps): JSX.Element => {
               </strong>
             </div>
 
-            <form onSubmit={handleCreateNewPool} className="mt-10 flex items-center gap-2">
+            <form onSubmit={createNewPool} className="mt-10 flex items-center gap-2">
               <input
                 type="text"
                 name="pool"
                 id="poll"
+                value={inputPool}
+                onChange={e => setInputPool(e.target.value)}
                 placeholder="Qual o nome do seu bolão?"
                 className="flex-1 h-14 rounded bg-zinc-800 px-6 text-sm ring-1 ring-zinc-600 transition-colors focus:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
@@ -150,6 +182,6 @@ export const getStaticProps: GetStaticProps = async () => {
       guesses: guesses.data,
       users: users.data,
     },
-    revalidate: 1800, // 30 minutes
+    revalidate: 600, // 10 minutes
   }
 }
