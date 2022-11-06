@@ -1,13 +1,14 @@
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
-import { Center, NativeBaseProvider, StatusBar } from 'native-base';
+import { NativeBaseProvider, StatusBar } from 'native-base';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 
+import { Routes } from './src/routes';
 import { Loading } from './src/components/Loading';
+import { Background } from './src/components/Background';
 
 import { theme } from './src/styles/theme';
-import { SignIn } from './src/screens/SignIn';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,7 +47,11 @@ const App = (): JSX.Element => {
         translucent
       />
 
-      {!appIsReady ? <Loading /> : <SignIn onLayout={onLayoutRootView} />}
+      {!appIsReady ? <Loading /> : (
+        <Background onLayout={onLayoutRootView}>
+          <Routes />
+        </Background>
+      )}
     </NativeBaseProvider>
   );
 }

@@ -1,5 +1,7 @@
 import { Center, IBoxProps, Text } from "native-base";
 
+import LogoImg from '../../assets/logo.svg';
+
 export const SignIn = ({...rest}: IBoxProps) => {
   return (
     <Center
@@ -7,8 +9,9 @@ export const SignIn = ({...rest}: IBoxProps) => {
       bg="gray.900"
       {...rest}
     >
+      <LogoImg />
       <Text color="gray.200">
-        Open up App.js to start working on your app!
+        SignIn
       </Text>
     </Center>
   )
