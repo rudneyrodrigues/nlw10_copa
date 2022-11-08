@@ -9,6 +9,7 @@ import { Loading } from './src/components/Loading';
 import { Background } from './src/components/Background';
 
 import { theme } from './src/styles/theme';
+import { AuthContextProvider } from './src/contexts/AuthContext';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -48,9 +49,11 @@ const App = (): JSX.Element => {
       />
 
       {!appIsReady ? <Loading /> : (
-        <Background onLayout={onLayoutRootView}>
-          <Routes />
-        </Background>
+        <AuthContextProvider>
+          <Background onLayout={onLayoutRootView}>
+            <Routes />
+          </Background>
+        </AuthContextProvider>
       )}
     </NativeBaseProvider>
   );
