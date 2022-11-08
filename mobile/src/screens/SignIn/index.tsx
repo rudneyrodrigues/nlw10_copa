@@ -1,11 +1,13 @@
 import { Fontisto } from '@expo/vector-icons';
 import { Center, IBoxProps, Icon, Text } from "native-base";
 
-import LogoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/useAuth';
 import { Button } from "../../components/Button";
 
+import LogoImg from '../../assets/logo.svg';
+
 export const SignIn = ({...rest}: IBoxProps) => {
-  const signInWithGoogle = () => {}
+  const { signIn } = useAuth();
 
   return (
     <Center
@@ -23,6 +25,7 @@ export const SignIn = ({...rest}: IBoxProps) => {
         leftIcon={
           <Icon as={Fontisto} name="google" color="white" size="md" />
         }
+        onPress={signIn}
       />
 
       <Text

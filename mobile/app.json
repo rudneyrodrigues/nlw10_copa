@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Bolão da Copa",
-    "slug": "Bolão da Copa",
-    "scheme": "Bolão da Copa",
+    "slug": "bolao-da-copa",
+    "scheme": "bolao-da-copa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
