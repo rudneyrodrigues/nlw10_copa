@@ -23,7 +23,7 @@ export const AuthRoutes = (): JSX.Element => {
           backgroundColor: "#121214",
         }
       }}
-      initialRouteName='Pools'
+      initialRouteName='SignIn'
     >
       <Screen name="SignIn" component={SignIn} />
       <Screen name="New" component={New} />
