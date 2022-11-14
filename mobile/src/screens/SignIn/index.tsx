@@ -8,7 +8,7 @@ import { Background } from '../../components/Background';
 import LogoImg from '../../assets/logo.svg';
 
 export const SignIn = ({...rest}: IBoxProps) => {
-  const { signIn } = useAuth();
+  const { signIn, userIsLoading } = useAuth();
 
   return (
     <Background>
@@ -28,6 +28,8 @@ export const SignIn = ({...rest}: IBoxProps) => {
             <Icon as={Fontisto} name="google" color="white" size="md" />
           }
           onPress={signIn}
+          isLoading={userIsLoading}
+          disabled={userIsLoading}
         />
 
         <Text

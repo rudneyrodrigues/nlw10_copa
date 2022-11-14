@@ -6,13 +6,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { New } from '../screens/New';
 import { Find } from '../screens/Find';
 import { Pools } from '../screens/Pools';
-import { SignIn } from '../screens/SignIn';
 
 export type RootTabParamList = {
   New: undefined;
   Pools: undefined;
   Find: undefined;
-  SignIn: undefined;
 }
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
@@ -56,9 +54,6 @@ export const AppRoutes = () => {
         tabBarLabel: 'Meus bolões'
       }} />
       <Screen name="Find" component={Find} options={{
-        tabBarButton: () => null
-      }} />
-      <Screen name="SignIn" component={SignIn} options={{
         tabBarButton: () => null
       }} />
     </Navigator>
